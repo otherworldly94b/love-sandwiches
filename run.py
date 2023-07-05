@@ -61,6 +61,15 @@ def update_sales_worksheet(data):
     sales_worksheet.append_row(data)
     print("sales worksheet updated successfully.\n")
 
+def update_surplus_worksheet(data):
+    """
+    Update surplus worksheet, add new row with the list data provided.
+    """
+    print("Updating surplus worksheet...\n")
+    surplus_worksheet = SHEET.worksheet("surplus")
+    surplus_worksheet.append_row(data)
+    print("Surplus worksheet updated successfully.\n")
+
 
 def calculate_surplass_data(sales_row):
     """
@@ -76,7 +85,7 @@ def calculate_surplass_data(sales_row):
     
     surplus_data = []
     for stock, sales in zip(stock_row, sales_row):
-        surplus = int(stock) - int(sales)
+        surplus = int(stock) - sales
         surplus_data.append(surplus)
 
     return surplus_data
@@ -91,7 +100,7 @@ def main():
     update_sales_worksheet(sales_data)
     calculate_surplass_data(sales_data)
     new_surplus_data = calculate_surplass_data(sales_data)
-    print(new_surplus_data)
+    update_surplus_worksheet(new_surplus_data)
 
 print("Welcome to Love Sandwiches Data Automation")
 main()
